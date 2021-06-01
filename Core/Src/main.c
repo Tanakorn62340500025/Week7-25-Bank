@@ -48,6 +48,10 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 uint64_t _micros = 0;
 float EncoderVel = 0;
+float error = 0;
+float errorplus = 0;
+float errorbefore = 0;
+float rpmencodervel = 0;
 uint64_t Timestamp_Encoder = 0;
 /* USER CODE END PV */
 
@@ -111,20 +115,22 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  //RAW Read
-	  		if (micros() - Timestamp_Encoder >= 1000)
-	  		{
-	  			Timestamp_Encoder = micros();
-	  			EncoderVel = EncoderVelocity_Update();
-	  		}
+	  		//if (micros() - Timestamp_Encoder >= 1000)
+	  		//{
+	  			//Timestamp_Encoder = micros();
+	  			//EncoderVel = EncoderVelocity_Update();
+	  		//}
 	  		//ค่านี้จะเก็บในตัวเเปร encodervel
 
 
 
 	  		//Add LPF?
-	  		if (micros() - Timestamp_Encoder >= 100)
+	  		if (micros() - Timestamp_Encoder >= 1000)
 	  		{
 	  			Timestamp_Encoder = micros();
-	  			EncoderVel = (EncoderVel * 99 + EncoderVelocity_Update()) / 100.0;
+	  			//EncoderVel = (EncoderVel * 99 + EncoderVelocity_Update()) / 100.0;
+	  			rpmencodervel = (EncoderVel*60/3072)
+
 	  		}
 	  		//low pass filter
   }
