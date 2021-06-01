@@ -52,6 +52,7 @@ float error = 0;
 float errorplus = 0;
 float errorbefore = 0;
 float rpmencodervel = 0;
+float rpmwant = 0;
 uint64_t Timestamp_Encoder = 0;
 /* USER CODE END PV */
 
@@ -129,7 +130,9 @@ int main(void)
 	  		{
 	  			Timestamp_Encoder = micros();
 	  			//EncoderVel = (EncoderVel * 99 + EncoderVelocity_Update()) / 100.0;
-	  			rpmencodervel = (EncoderVel*60/3072)
+	  			rpmencodervel = (EncoderVel*60/3072);
+	  			error = rpmwant - rpmencodervel;
+
 
 	  		}
 	  		//low pass filter
