@@ -19,7 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include <math.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -53,6 +53,9 @@ float errorplus = 0;
 float errorbefore = 0;
 float rpmencodervel = 0;
 float rpmwant = 0;
+float kp = 0;
+float ki = 0;
+float kd = 0;
 uint64_t Timestamp_Encoder = 0;
 /* USER CODE END PV */
 
@@ -131,7 +134,16 @@ int main(void)
 	  			Timestamp_Encoder = micros();
 	  			//EncoderVel = (EncoderVel * 99 + EncoderVelocity_Update()) / 100.0;
 	  			rpmencodervel = (EncoderVel*60/3072);
-	  			error = rpmwant - rpmencodervel;
+	  			//errorต้องใช้absเนื่องจากกลัวมีปัญหากับการลบหรือบวกเลข
+	  			error = fabs(rpmwant) - fabs(rpmencodervel);
+	  			//บวกเพื่อให้นำไปใส่ในสมการ PID ได้
+	  			errorplus += error;
+	  			//PID equation
+	  			pwmoutput =
+
+
+
+
 
 
 	  		}
